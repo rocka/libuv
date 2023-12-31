@@ -268,6 +268,10 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Android")
        src/unix/random-getentropy.c
        src/unix/random-getrandom.c
        src/unix/random-sysctl-linux.c)
+  if(ANDROID_PLATFORM_LEVEL LESS 24)
+    list(APPEND uv_sources
+        src/unix/android-ifaddrs.c)
+  endif()
 endif()
 
 if(APPLE OR CMAKE_SYSTEM_NAME MATCHES "Android|Linux")
